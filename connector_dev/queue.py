@@ -30,7 +30,8 @@ class QueueJob(orm.Model):
     def run_now(self, cr, uid, ids, context=None):
         session = ConnectorSession(cr, uid, context=context)
         storage = OpenERPJobStorage(session)
-        for job in self.browse(cr, uid, ids, context=context):
-            job = storage.load(job.uuid)
+        for oe_job in self.browse(cr, uid, ids, context=context):
+            job = storage.load(oe_job.uuid)
             job.perform(session)
+            oe_job.write({'state': 'done'})
         return True
