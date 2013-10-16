@@ -26,7 +26,7 @@
  'license': 'AGPL-3',
  'category': 'Generic Modules',
  'description': """
-Helper to connector to retry instantly to perform a job.
+.Helper to connector to retry instantly to perform a job.
 It add a button in backend to retry failed job.
 """,
  'depends': ['connector'

@@ -21,5 +21,20 @@
     </field>
 </record>
 
+
+<record id="view_queue_job_tree" model="ir.ui.view">
+    <field name="model">queue.job</field>
+    <field name="inherit_id" ref="connector.view_queue_job_tree"/>
+    <field name="arch" type="xml">
+        <field name="uuid" position="replace">
+            <field name="model_name"/>
+        </field>
+        <field name="date_done" position="after">
+            <field name="uuid"/>
+        </field>
+    </field>
+</record>
+
+
 </data>
 </openerp>
