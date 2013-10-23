@@ -15,8 +15,8 @@
     <field name="arch" type="xml">
         <xpath expr="//header/button[@name='requeue']" position="after">
             <button name="run_now"
-                        type="object"
-                        string="Run now"/>
+                    type="object"
+                    string="Run now"/>
         </xpath>
     </field>
 </record>
@@ -35,6 +35,24 @@
     </field>
 </record>
 
+<record id="action_server_queue_job_cron" model="ir.actions.server">
+    <field name="name">Run queue jobs cron</field>
+    <field name="condition">True</field>
+    <field name="type">ir.actions.server</field>
+    <field name="model_id" ref="model_queue_job" />
+    <field name="state">code</field>
+    <field name="code">self.pool['ir.cron'].run_manually(cr, uid, [self.pool['ir.model.data'].get_object_reference(cr, uid, 'connector', 'ir_cron_enqueue_jobs')[1]], context=context)</field>
+</record>
+
+<record model="ir.values" id="action_server_queue_job_cron_values">
+    <field name="name">Run jobs</field>
+    <field name="action_id" ref="action_server_queue_job_cron" />
+    <field name="value" eval="'ir.actions.server,' + str(ref('action_server_queue_job_cron'))" />
+    <field name="key">action</field>
+    <field name="model_id" ref="model_queue_job" />
+    <field name="model">queue.job</field>
+    <!--<field name="key2">client_action_multi</field>-->
+</record>
 
 </data>
 </openerp>

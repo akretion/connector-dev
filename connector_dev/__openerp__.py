@@ -29,7 +29,8 @@
 .Helper to connector to retry instantly to perform a job.
 It add a button in backend to retry failed job.
 """,
- 'depends': ['connector'
+ 'depends': ['connector',
+             'cron_run_manually',
              ],
  'data': ['job_view.xml',
           ],
