@@ -14,6 +14,9 @@
     <field name="inherit_id" ref="connector.view_queue_job_form"/>
     <field name="arch" type="xml">
         <xpath expr="//header/button[@name='requeue']" position="after">
+            <button name="run_queue_job_cron"
+                    type="object"
+                    string="Run queue jobs cron"/>
             <button name="run_now"
                     type="object"
                     string="Run now"/>

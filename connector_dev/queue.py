@@ -19,7 +19,7 @@
 #
 #############################################################################
 
-from openerp.osv import orm, fields
+from openerp.osv import orm
 from openerp.addons.connector.queue.job import OpenERPJobStorage
 from openerp.addons.connector.session import ConnectorSession
 
@@ -34,4 +34,9 @@ class QueueJob(orm.Model):
             job = storage.load(oe_job.uuid)
             job.perform(session)
             oe_job.write({'state': 'done'})
+        return True
+
+    def run_queue_job_cron(self, cr, uid, ids, context=None):
+        cron_id = self.pool['ir.model.data'].get_object_reference(cr, uid, 'connector', 'ir_cron_enqueue_jobs')[1]
+        self.pool['ir.cron'].run_manually(cr, uid, [cron_id], context=context)
         return True
