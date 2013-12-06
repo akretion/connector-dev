@@ -17,6 +17,9 @@
             <button name="run_queue_job_cron"
                     type="object"
                     string="Run queue jobs cron"/>
+            <button name="delete_failed_jobs"
+                    type="object"
+                    string="Clean failed jobs"/>
             <button name="run_now"
                     type="object"
                     string="Run now"/>

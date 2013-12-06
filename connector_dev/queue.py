@@ -24,6 +24,7 @@ from openerp.addons.connector.queue.job import OpenERPJobStorage
 from openerp.addons.connector.session import ConnectorSession
 
 
+
 class QueueJob(orm.Model):
     _inherit = 'queue.job'
 
@@ -37,6 +38,12 @@ class QueueJob(orm.Model):
         return True
 
     def run_queue_job_cron(self, cr, uid, ids, context=None):
-        cron_id = self.pool['ir.model.data'].get_object_reference(cr, uid, 'connector', 'ir_cron_enqueue_jobs')[1]
+        cron_id = self.pool['ir.model.data'].get_object_reference(
+            cr, uid, 'connector', 'ir_cron_enqueue_jobs')[1]
         self.pool['ir.cron'].run_manually(cr, uid, [cron_id], context=context)
         return True
+
+    def delete_failed_jobs(self, cr, uid, ids, context=None):
+        job_ids = self.search(
+            cr, uid, [('state', '=', 'failed')], context=context)
+        self.unlink(cr, uid, job_ids, context=context)
