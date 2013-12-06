@@ -31,7 +31,6 @@ It add a button in backend to retry failed job.
 """,
  'depends': ['connector',
              'cron_run_manually',
-             'magentoerpconnect',
              ],
  'data': ['job_view.xml',
           ],
