@@ -42,8 +42,3 @@ class QueueJob(orm.Model):
             cr, uid, 'connector', 'ir_cron_enqueue_jobs')[1]
         self.pool['ir.cron'].run_manually(cr, uid, [cron_id], context=context)
         return True
-
-    def delete_failed_jobs(self, cr, uid, ids, context=None):
-        job_ids = self.search(
-            cr, uid, [('state', '=', 'failed')], context=context)
-        self.unlink(cr, uid, job_ids, context=context)
