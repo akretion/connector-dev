@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<openerp>
+<data>
+
+<record id="view_queue_job_form" model="ir.ui.view">
+    <field name="model">queue.job</field>
+    <field name="inherit_id" ref="connector.view_queue_job_form"/>
+    <field name="arch" type="xml">
+        <xpath expr="//header/button[@name='requeue']" position="after">
+            <button name="delete_done_jobs"
+                    type="object"
+                    string="Clean done"/>
+            <button name="delete_failed_jobs"
+                    type="object"
+                    string="Clean failed"/>
+        </xpath>
+    </field>
+</record>
+
+
+</data>
+</openerp>
