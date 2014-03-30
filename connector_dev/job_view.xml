@@ -31,6 +31,7 @@
     <field name="arch" type="xml">
         <field name="uuid" position="replace">
             <field name="model_name"/>
+            <field name="exc_info_last_line"/>
         </field>
         <field name="date_done" position="after">
             <field name="uuid"/>
