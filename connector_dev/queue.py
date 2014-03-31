@@ -32,14 +32,15 @@ class QueueJob(orm.Model):
         for elm in self.browse(cr, uid, ids):
             trace = elm.exc_info
             if trace:
-                res[elm.id][field_n] = trace[trace[:-1].rfind('\n'):]
+                position = trace[:-1].rfind('\n') + 1
+                res[elm.id] = {field_n: trace[position:-1]}
         return res
 
     _columns = {
         'exc_info_last_line': fields.function(
             get_traceback_last_line,
             string='Traceback',
-            type='str',
+            type='unicode',
             store=False),
     }
 
