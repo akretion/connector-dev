@@ -27,23 +27,6 @@ from openerp.addons.connector.session import ConnectorSession
 class QueueJob(orm.Model):
     _inherit = 'queue.job'
     
-    def get_traceback_last_line(self, cr, uid, ids, field_n, arg, context=None):
-        res = {}
-        for elm in self.browse(cr, uid, ids):
-            trace = elm.exc_info
-            if trace:
-                position = trace[:-1].rfind('\n') + 1
-                res[elm.id] = {field_n: trace[position:-1]}
-        return res
-
-    _columns = {
-        'exc_info_last_line': fields.function(
-            get_traceback_last_line,
-            string='Traceback',
-            type='char',
-            store=False),
-    }
-
     def run_now(self, cr, uid, ids, context=None):
         session = ConnectorSession(cr, uid, context=context)
         storage = OpenERPJobStorage(session)
