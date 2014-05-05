@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<openerp>
+<data>
+
+
+<!--Model Queue Job-->
+<record id="view_queue_job_form" model="ir.ui.view">
+    <field name="model">queue.job</field>
+    <field name="inherit_id" ref="connector.view_queue_job_form"/>
+    <field name="arch" type="xml">
+        <field name="uuid" position="before">
+            <group colspan="4">
+                <field name="backend_link" widget="url"/>
+            </group>
+        </field>
+    </field>
+</record>
+
+<!--<record id="view_queue_job_tree" model="ir.ui.view">
+    <field name="model">queue.job</field>
+    <field name="inherit_id" ref="connector.view_queue_job_tree"/>
+    <field name="arch" type="xml">
+        <field name="name" position="after">
+            <field name="backend_link"/>
+        </field>
+    </field>
+</record>-->
+
+
+<!--Model Sale Order-->
+<!--<record id="view_order_form" model="ir.ui.view">-->
+<!--    <field name="model">sale.order</field>-->
+<!--    <field name="inherit_id" ref="sale.view_order_form"/>-->
+<!--    <field name="arch" type="xml">-->
+<!--        <xpath expr="//notebook" position="before">-->
+<!--            <span>-->
+<!--                <field name="backend_link" widget="url"/>-->
+<!--            </span>-->
+<!--        </xpath>-->
+<!--    </field>-->
+<!--</record>-->
+
+
+</data>
+</openerp>
