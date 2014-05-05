@@ -30,7 +30,7 @@
     <field name="inherit_id" ref="connector.view_queue_job_tree"/>
     <field name="arch" type="xml">
         <field name="name" position="after">
-            <field name="exc_info_last_line"/>
+            <field name="model_name"/>
         </field>
     </field>
 </record>
