@@ -37,6 +37,7 @@ Connector job view customize :
  'depends': ['connector',
              ],
  'data': ['job_view.xml',
+          'model_view.xml',
           ],
  'installable': True,
  'application': False,

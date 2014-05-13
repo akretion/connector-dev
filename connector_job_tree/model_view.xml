@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="0">
+
+        <record id="view_setdone_job" model="ir.ui.view">
+            <field name="name">Set Done Jobs</field>
+            <field name="model">queue.setdone.job</field>
+            <field name="arch" type="xml">
+                <form string="Set Done Jobs" version="7.0">
+                    <group string="The selected jobs will be done.">
+                        <field name="job_ids" nolabel="1"/>
+                    </group>
+                    <footer>
+                        <button name="button_done"
+                                state="pending,enqueued,failed"
+                                string="Set Done"
+                                type="object"
+                                groups="connector.group_connector_manager"
+                                class="oe_highlight"/>
+                        or
+                        <button string="Cancel"
+                                class="oe_link"
+                                special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_setdone_job" model="ir.actions.act_window">
+            <field name="name">Set Done Jobs</field>
+            <field name="res_model">queue.setdone.job</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_setdone_job"/>
+            <field name="target">new</field>
+        </record>
+
+        <record id="action_setdone_job_values" model="ir.values">
+            <field name="name">Set Done Jobs</field>
+            <field name="key2">client_action_multi</field>
+            <field name="model">queue.job</field>
+            <field name="value" eval="'ir.actions.act_window,' + str(ref('action_setdone_job'))"/>
+            <field eval="True" name="object"/>
+        </record>
+
+
+    </data>
+</openerp>
