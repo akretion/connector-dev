@@ -14,7 +14,6 @@
     <field name="inherit_id" ref="connector.view_queue_job_search"/>
     <field name="arch" type="xml">
         <xpath expr="//search/field[@name='uuid']" position="replace">
-            <field name="model_name"/>
             <field name="exc_info"/>
             <field name="result"/>
         </xpath>
