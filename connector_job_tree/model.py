@@ -52,3 +52,32 @@ class setdone_job(orm.TransientModel):
         job_ids = [job.id for job in form.job_ids]
         self.pool.get('queue.job').button_done(cr, uid, job_ids, context=context)
         return {'type': 'ir.actions.act_window_close'}
+
+
+class QueueJob(orm.Model):
+    _inherit = 'queue.job'
+
+    def extract_exc_info(self, cr, uid, ids, field_n, arg, context=None):
+        res = {}
+        for elm in self.browse(cr, uid, ids):
+            exception = False
+            if elm.exc_info:
+                exception = elm.exc_info[:-1]
+                last_position = exception.rfind('\n')
+                pre_last_position = exception[:last_position].rfind('\n')
+                if pre_last_position > 0:
+                    exception = exception[pre_last_position:]
+                else:
+                    exception = exception[last_position:]
+            res[elm.id] = exception
+        return res
+
+    _columns = {
+        'exc_info_short': fields.function(
+            extract_exc_info,
+            string='Except short',
+            type='text',
+            store=False,
+            help="Last lines of except message"),
+    }
+
