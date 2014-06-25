@@ -29,8 +29,8 @@
     <field name="model">queue.job</field>
     <field name="inherit_id" ref="connector.view_queue_job_tree"/>
     <field name="arch" type="xml">
-        <field name="name" position="after">
-            <field name="model_name"/>
+        <field name="name" position="before">
+            <field name="id"/>
         </field>
     </field>
 </record>
