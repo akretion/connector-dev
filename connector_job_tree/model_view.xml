@@ -40,7 +40,6 @@
             <field name="key2">client_action_multi</field>
             <field name="model">queue.job</field>
             <field name="value" eval="'ir.actions.act_window,' + str(ref('action_setdone_job'))"/>
-            <field eval="True" name="object"/>
         </record>
 
 
