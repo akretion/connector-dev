@@ -19,21 +19,42 @@
 #
 #############################################################################
 
+import traceback
+from StringIO import StringIO
+
 from openerp.osv import orm
 from openerp.addons.connector.queue.job import OpenERPJobStorage
 from openerp.addons.connector.session import ConnectorSession
+from openerp import SUPERUSER_ID
+from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
 
+from datetime import datetime
 
 class QueueJob(orm.Model):
     _inherit = 'queue.job'
-    
+
     def run_now(self, cr, uid, ids, context=None):
-        session = ConnectorSession(cr, uid, context=context)
-        storage = OpenERPJobStorage(session)
-        for oe_job in self.browse(cr, uid, ids, context=context):
+        for oe_job in self.browse(cr, SUPERUSER_ID, ids, context=context):
+            session = ConnectorSession(cr, oe_job.user_id.id, context=context)
+            storage = OpenERPJobStorage(session)
             job = storage.load(oe_job.uuid)
-            job.perform(session)
-            oe_job.write({'state': 'done'})
+            try:
+                job.perform(session)
+            except:
+                buff = StringIO()
+                traceback.print_exc(file=buff)
+                #job.set_failed(exc_info=buff.getvalue())
+                #job.state = 'failed'
+                #storage.store(job)
+                oe_job.write({
+                    'state': 'failed',
+                    'exc_info': buff.getvalue()    
+                })
+                raise
+            oe_job.write({
+                'state': 'done',
+                'date_done': datetime.now().strftime(DEFAULT_SERVER_DATETIME_FORMAT),
+            })
         return True
 
     def run_queue_job_cron(self, cr, uid, ids, context=None):
