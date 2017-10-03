@@ -40,6 +40,6 @@ Do not
              ],
  'data': ['job_view.xml',
           ],
- 'installable': True,
+ 'installable': False,
  'application': False,
 }

@@ -34,6 +34,6 @@ It add a button in backend to retry failed job.
              ],
  'data': ['job_view.xml',
           ],
- 'installable': True,
+ 'installable': False,
  'application': False,
 }

@@ -68,7 +68,7 @@ Contributors
         'model_view.xml',
     ],
     'tests': [],
-    'installable': True,
+    'installable': False,
     'license': 'AGPL-3',
     'auto_install': False,
     'application': False,

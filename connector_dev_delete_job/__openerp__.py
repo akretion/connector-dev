@@ -32,6 +32,6 @@ Allow to delete connector jobs in queue job interface. Useful for development
              ],
  'data': ['job_view.xml',
           ],
- 'installable': True,
+ 'installable': False,
  'application': False,
 }

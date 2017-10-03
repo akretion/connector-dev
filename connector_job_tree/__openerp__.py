@@ -39,6 +39,6 @@ Connector job view customize :
  'data': ['job_view.xml',
           'model_view.xml',
           ],
- 'installable': True,
+ 'installable': False,
  'application': False,
 }
