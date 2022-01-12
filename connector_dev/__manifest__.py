@@ -1,10 +1,9 @@
-# -*- coding: utf-8 -*-
 # Copyright 2013 Akretion (http://www.akretion.com).
 # @author Sébastien BEAU <sebastien.beau@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {'name': 'Connector dev',
- 'version': '7.0.1',
+ 'version': '14.0.1.0.0',
  'author': 'Openerp Connector Core Editors',
  'website': 'https://launchpad.net/openerp-connector',
  'license': 'AGPL-3',
@@ -14,7 +13,7 @@
 It add a button in backend to retry failed job.
 """,
  'depends': [
-     'connector',
+     'queue_job',
  ],
  'data': [
      'job_view.xml',
